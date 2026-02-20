@@ -8,7 +8,24 @@ export interface StudentProfile {
     exam: string;
     streak: number;
     email: string;
+    avatar?: string;
 }
+
+export interface QuizQuestion {
+    id: string;
+    question: string;
+    options: string[];
+    correctIndex: number;
+    topic: string;
+}
+
+// ─── Pingo Avatars ───────────────────────────────────────
+export const pingoAvatars: Record<Emotion, string> = {
+    Stressed: "/pingo_angry.png",
+    Focused: "/pingo_confident.png",
+    Confused: "/pingo_thinking.png",
+    Calm: "/pingo_happy.png",
+};
 
 export interface MetricItem {
     label: string;
@@ -40,11 +57,6 @@ export interface StudentRecord {
     emotion: Emotion;
     riskLevel: RiskLevel;
     lastActive: string;
-    avgScore: number;
-    stressLevel: number;
-    confidenceLevel: number;
-    loginCount: number;
-    avgSessionTime: number;
 }
 
 // ─── Student Profile ─────────────────────────────────────
@@ -105,14 +117,53 @@ export const mockTeacherMetrics: MetricItem[] = [
 
 // ─── Student Records (Teacher Table) ─────────────────────
 export const mockStudents: StudentRecord[] = [
-    { id: "st1", name: "Aarav Patel", exam: "GRE", emotion: "Focused", riskLevel: "Low", lastActive: "2 min ago", avgScore: 85, stressLevel: 2, confidenceLevel: 4, loginCount: 12, avgSessionTime: 45 },
-    { id: "st2", name: "Meera Singh", exam: "GMAT", emotion: "Stressed", riskLevel: "High", lastActive: "15 min ago", avgScore: 62, stressLevel: 4, confidenceLevel: 2, loginCount: 8, avgSessionTime: 30 },
-    { id: "st3", name: "Rohan Gupta", exam: "CAT", emotion: "Stressed", riskLevel: "High", lastActive: "1 hr ago", avgScore: 58, stressLevel: 4, confidenceLevel: 2, loginCount: 6, avgSessionTime: 25 },
-    { id: "st4", name: "Priya Sharma", exam: "GRE", emotion: "Calm", riskLevel: "Medium", lastActive: "30 min ago", avgScore: 75, stressLevel: 2, confidenceLevel: 3, loginCount: 10, avgSessionTime: 40 },
-    { id: "st5", name: "Arjun Reddy", exam: "GMAT", emotion: "Confused", riskLevel: "Medium", lastActive: "45 min ago", avgScore: 70, stressLevel: 3, confidenceLevel: 3, loginCount: 9, avgSessionTime: 35 },
-    { id: "st6", name: "Kavya Nair", exam: "CAT", emotion: "Focused", riskLevel: "Low", lastActive: "5 min ago", avgScore: 88, stressLevel: 1, confidenceLevel: 4, loginCount: 14, avgSessionTime: 50 },
-    { id: "st7", name: "Ishaan Joshi", exam: "GRE", emotion: "Stressed", riskLevel: "High", lastActive: "20 min ago", avgScore: 60, stressLevel: 4, confidenceLevel: 2, loginCount: 7, avgSessionTime: 28 },
-    { id: "st8", name: "Diya Menon", exam: "GMAT", emotion: "Calm", riskLevel: "Low", lastActive: "10 min ago", avgScore: 82, stressLevel: 1, confidenceLevel: 4, loginCount: 11, avgSessionTime: 48 },
+    { id: "st1", name: "Aarav Patel", exam: "GRE", emotion: "Focused", riskLevel: "Low", lastActive: "2 min ago" },
+    { id: "st2", name: "Meera Singh", exam: "GMAT", emotion: "Stressed", riskLevel: "High", lastActive: "15 min ago" },
+    { id: "st3", name: "Rohan Gupta", exam: "CAT", emotion: "Stressed", riskLevel: "High", lastActive: "1 hr ago" },
+    { id: "st4", name: "Priya Sharma", exam: "GRE", emotion: "Calm", riskLevel: "Medium", lastActive: "30 min ago" },
+    { id: "st5", name: "Arjun Reddy", exam: "GMAT", emotion: "Confused", riskLevel: "Medium", lastActive: "45 min ago" },
+    { id: "st6", name: "Kavya Nair", exam: "CAT", emotion: "Focused", riskLevel: "Low", lastActive: "5 min ago" },
+    { id: "st7", name: "Ishaan Joshi", exam: "GRE", emotion: "Stressed", riskLevel: "High", lastActive: "20 min ago" },
+    { id: "st8", name: "Diya Menon", exam: "GMAT", emotion: "Calm", riskLevel: "Low", lastActive: "10 min ago" },
+];
+
+// ─── Quiz Questions ──────────────────────────────────────
+export const mockQuizQuestions: QuizQuestion[] = [
+    {
+        id: "q1",
+        question: "What is the discriminant of the quadratic equation 2x² + 5x - 3 = 0?",
+        options: ["49", "37", "25", "31"],
+        correctIndex: 0,
+        topic: "Algebra",
+    },
+    {
+        id: "q2",
+        question: "If f(x) = 3x² - 12x + 7, what is the vertex of the parabola?",
+        options: ["(2, -5)", "(2, 5)", "(-2, -5)", "(4, 7)"],
+        correctIndex: 0,
+        topic: "Algebra",
+    },
+    {
+        id: "q3",
+        question: "A circle has a radius of 7 cm. What is its area?",
+        options: ["154 cm²", "44 cm²", "49π cm²", "Both A and C"],
+        correctIndex: 3,
+        topic: "Geometry",
+    },
+    {
+        id: "q4",
+        question: "Which word best completes: 'The speaker's _____ remarks offended the audience.'",
+        options: ["Eloquent", "Acerbic", "Benign", "Tepid"],
+        correctIndex: 1,
+        topic: "Vocabulary",
+    },
+    {
+        id: "q5",
+        question: "What is the sum of all integers from 1 to 50?",
+        options: ["1225", "1275", "1250", "1300"],
+        correctIndex: 1,
+        topic: "Data Interpretation",
+    },
 ];
 
 // ─── Exam Options ────────────────────────────────────────

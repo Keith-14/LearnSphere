@@ -1,15 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Sidebar from "@/components/Sidebar";
 import MetricsCard from "@/components/MetricsCard";
 import DashboardCard from "@/components/DashboardCard";
 import EmotionBadge from "@/components/EmotionBadge";
 import ChatWindow from "@/components/ChatWindow";
+import QuizWindow from "@/components/QuizWindow";
 import {
     mockStudentProfile,
     mockStudentMetrics,
     mockRecentSessions,
+    pingoAvatars,
 } from "@/lib/mockData";
 
 const metricColors = ["#58CC02", "#FF9600", "#FF4B4B", "#1CB0F6"];
@@ -41,47 +44,50 @@ export default function StudentPage() {
                 {/* ─── DASHBOARD ─── */}
                 {activeNav === "dashboard" && !sessionActive && (
                     <>
-                        <div className="mb-8">
-                            <h1 className="text-3xl font-black text-[#3C3C3C]">
-                                Hey, {mockStudentProfile.name.split(" ")[0]}! 👋
-                            </h1>
-                            <p className="text-[#AFAFAF] font-bold mt-1">Keep up your amazing streak! You&apos;re doing great! 🚀</p>
+                        <div className="mb-8 flex items-center gap-4">
+                            <Image src={pingoAvatars["Calm"]} alt="Pingo" width={56} height={56} className="rounded-full border-2 border-[#58CC02]" />
+                            <div>
+                                <h1 className="text-3xl font-black text-[#3C3C3C]">
+                                    Hey, {mockStudentProfile.name.split(" ")[0]}! 👋
+                                </h1>
+                                <p className="text-[#AFAFAF] font-bold mt-0.5">Keep up your amazing streak! You&apos;re doing great! 🚀</p>
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
                             {mockStudentMetrics.map((metric, i) => (
-                                <MetricsCard
-                                    key={metric.label}
-                                    label={metric.label}
-                                    value={metric.value}
-                                    subtext={metric.subtext}
-                                    icon={metric.icon}
-                                    color={metricColors[i]}
-                                />
+                                <MetricsCard key={metric.label} label={metric.label} value={metric.value} subtext={metric.subtext} icon={metric.icon} color={metricColors[i]} />
                             ))}
                         </div>
 
-                        <DashboardCard className="mb-6 cursor-pointer group hover:border-b-2 hover:mt-[2px] transition-all duration-100">
-                            <button
-                                onClick={() => { setSessionActive(true); setActiveNav("session"); }}
-                                className="w-full text-left"
-                            >
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <h2 className="text-xl font-extrabold text-[#3C3C3C] group-hover:text-[#58CC02] transition-colors">
-                                            📖 Start Study Session
-                                        </h2>
-                                        <p className="text-sm font-bold text-[#AFAFAF] mt-1">
-                                            Jump into an adaptive session tailored just for you!
-                                        </p>
+                        {/* Action Cards */}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6">
+                            <DashboardCard className="cursor-pointer group hover:border-b-2 hover:mt-[2px] transition-all duration-100">
+                                <button onClick={() => { setSessionActive(true); setActiveNav("session"); }} className="w-full text-left">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <h2 className="text-xl font-extrabold text-[#3C3C3C] group-hover:text-[#58CC02] transition-colors">📖 Start Study Session</h2>
+                                            <p className="text-sm font-bold text-[#AFAFAF] mt-1">Chat with Pingo and learn adaptively!</p>
+                                        </div>
+                                        <Image src={pingoAvatars["Focused"]} alt="Study" width={56} height={56} className="rounded-2xl" />
                                     </div>
-                                    <div className="w-14 h-14 rounded-2xl bg-[#58CC02] flex items-center justify-center border-b-4 border-[#46A302] group-hover:border-b-2 group-hover:mt-[2px] transition-all">
-                                        <span className="text-white text-2xl font-black">→</span>
-                                    </div>
-                                </div>
-                            </button>
-                        </DashboardCard>
+                                </button>
+                            </DashboardCard>
 
+                            <DashboardCard className="cursor-pointer group hover:border-b-2 hover:mt-[2px] transition-all duration-100">
+                                <button onClick={() => setActiveNav("quiz")} className="w-full text-left">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <h2 className="text-xl font-extrabold text-[#3C3C3C] group-hover:text-[#1CB0F6] transition-colors">🧩 Start Quiz</h2>
+                                            <p className="text-sm font-bold text-[#AFAFAF] mt-1">Test your knowledge with adaptive quizzes!</p>
+                                        </div>
+                                        <Image src={pingoAvatars["Calm"]} alt="Quiz" width={56} height={56} className="rounded-2xl" />
+                                    </div>
+                                </button>
+                            </DashboardCard>
+                        </div>
+
+                        {/* Recent Sessions */}
                         <DashboardCard>
                             <h3 className="text-lg font-extrabold text-[#3C3C3C] mb-4">📝 Recent Sessions</h3>
                             <div className="overflow-x-auto">
@@ -103,9 +109,7 @@ export default function StudentPage() {
                                                 <td className="py-3.5 font-bold text-[#AFAFAF]">{session.duration}</td>
                                                 <td className="py-3.5"><EmotionBadge emotion={session.emotion} /></td>
                                                 <td className="py-3.5">
-                                                    <span className={`font-extrabold text-base ${session.score >= 75 ? "text-[#58CC02]" : session.score >= 60 ? "text-[#FFC800]" : "text-[#FF4B4B]"}`}>
-                                                        {session.score}%
-                                                    </span>
+                                                    <span className={`font-extrabold text-base ${session.score >= 75 ? "text-[#58CC02]" : session.score >= 60 ? "text-[#FFC800]" : "text-[#FF4B4B]"}`}>{session.score}%</span>
                                                 </td>
                                             </tr>
                                         ))}
@@ -119,20 +123,40 @@ export default function StudentPage() {
                 {/* ─── STUDY SESSION ─── */}
                 {(activeNav === "session" || sessionActive) && (
                     <div>
-                        <div className="mb-6">
-                            <h1 className="text-3xl font-black text-[#3C3C3C]">📖 Study Session</h1>
-                            <p className="text-[#AFAFAF] font-bold mt-1">Your adaptive learning session is live!</p>
+                        <div className="mb-6 flex items-center gap-3">
+                            <Image src={pingoAvatars["Focused"]} alt="Pingo" width={40} height={40} className="rounded-full border-2 border-[#1CB0F6]" />
+                            <div>
+                                <h1 className="text-3xl font-black text-[#3C3C3C]">📖 Study Session</h1>
+                                <p className="text-[#AFAFAF] font-bold mt-0.5">Your adaptive learning session is live!</p>
+                            </div>
                         </div>
                         <ChatWindow onClose={() => { setSessionActive(false); setActiveNav("dashboard"); }} />
+                    </div>
+                )}
+
+                {/* ─── QUIZ ─── */}
+                {activeNav === "quiz" && !sessionActive && (
+                    <div>
+                        <div className="mb-6 flex items-center gap-3">
+                            <Image src={pingoAvatars["Calm"]} alt="Pingo" width={40} height={40} className="rounded-full border-2 border-[#58CC02]" />
+                            <div>
+                                <h1 className="text-3xl font-black text-[#3C3C3C]">🧩 Quiz Mode</h1>
+                                <p className="text-[#AFAFAF] font-bold mt-0.5">Test your knowledge — camera is watching your emotions!</p>
+                            </div>
+                        </div>
+                        <QuizWindow onClose={() => setActiveNav("dashboard")} />
                     </div>
                 )}
 
                 {/* ─── EMOTION INSIGHTS ─── */}
                 {activeNav === "insights" && !sessionActive && (
                     <>
-                        <div className="mb-8">
-                            <h1 className="text-3xl font-black text-[#3C3C3C]">💡 Emotion Insights</h1>
-                            <p className="text-[#AFAFAF] font-bold mt-1">Understand your emotional patterns across study sessions</p>
+                        <div className="mb-8 flex items-center gap-3">
+                            <Image src={pingoAvatars["Confused"]} alt="Pingo" width={40} height={40} className="rounded-full border-2 border-[#CE82FF]" />
+                            <div>
+                                <h1 className="text-3xl font-black text-[#3C3C3C]">💡 Emotion Insights</h1>
+                                <p className="text-[#AFAFAF] font-bold mt-0.5">Understand your emotional patterns across study sessions</p>
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6">
@@ -140,7 +164,7 @@ export default function StudentPage() {
                                 <h3 className="text-lg font-extrabold text-[#3C3C3C] mb-4">🎭 Emotion Over Time</h3>
                                 <div className="h-48 flex items-center justify-center rounded-xl bg-[#F7F7F7] border-2 border-dashed border-[#E5E5E5]">
                                     <div className="text-center">
-                                        <p className="text-3xl mb-2">📈</p>
+                                        <Image src={pingoAvatars["Calm"]} alt="Chart" width={48} height={48} className="mx-auto mb-2" />
                                         <p className="text-[#AFAFAF] text-sm font-bold">Chart coming soon!</p>
                                     </div>
                                 </div>
@@ -149,7 +173,7 @@ export default function StudentPage() {
                                 <h3 className="text-lg font-extrabold text-[#3C3C3C] mb-4">🧠 Emotion Breakdown</h3>
                                 <div className="h-48 flex items-center justify-center rounded-xl bg-[#F7F7F7] border-2 border-dashed border-[#E5E5E5]">
                                     <div className="text-center">
-                                        <p className="text-3xl mb-2">🥧</p>
+                                        <Image src={pingoAvatars["Focused"]} alt="Chart" width={48} height={48} className="mx-auto mb-2" />
                                         <p className="text-[#AFAFAF] text-sm font-bold">Chart coming soon!</p>
                                     </div>
                                 </div>
@@ -161,9 +185,12 @@ export default function StudentPage() {
                             <div className="space-y-3">
                                 {mockRecentSessions.map((s) => (
                                     <div key={s.id} className="flex items-center justify-between p-4 rounded-xl bg-[#F7F7F7] border-2 border-[#E5E5E5]">
-                                        <div>
-                                            <p className="font-extrabold text-[#3C3C3C]">{s.topic}</p>
-                                            <p className="text-xs font-bold text-[#AFAFAF]">{s.date} · {s.duration}</p>
+                                        <div className="flex items-center gap-3">
+                                            <Image src={pingoAvatars[s.emotion]} alt={s.emotion} width={32} height={32} className="rounded-full" />
+                                            <div>
+                                                <p className="font-extrabold text-[#3C3C3C]">{s.topic}</p>
+                                                <p className="text-xs font-bold text-[#AFAFAF]">{s.date} · {s.duration}</p>
+                                            </div>
                                         </div>
                                         <EmotionBadge emotion={s.emotion} />
                                     </div>
@@ -176,9 +203,12 @@ export default function StudentPage() {
                 {/* ─── PROGRESS ─── */}
                 {activeNav === "progress" && !sessionActive && (
                     <>
-                        <div className="mb-8">
-                            <h1 className="text-3xl font-black text-[#3C3C3C]">🏆 Progress</h1>
-                            <p className="text-[#AFAFAF] font-bold mt-1">Track your learning journey and achievements!</p>
+                        <div className="mb-8 flex items-center gap-3">
+                            <Image src={pingoAvatars["Calm"]} alt="Pingo" width={40} height={40} className="rounded-full border-2 border-[#58CC02]" />
+                            <div>
+                                <h1 className="text-3xl font-black text-[#3C3C3C]">🏆 Progress</h1>
+                                <p className="text-[#AFAFAF] font-bold mt-0.5">Track your learning journey and achievements!</p>
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-6">
@@ -206,22 +236,15 @@ export default function StudentPage() {
                             <div className="space-y-3">
                                 {mockRecentSessions.map((s) => (
                                     <div key={s.id} className="flex items-center gap-4 p-4 rounded-xl bg-[#F7F7F7] border-2 border-[#E5E5E5]">
+                                        <Image src={pingoAvatars[s.emotion]} alt={s.emotion} width={28} height={28} className="rounded-full" />
                                         <div className="flex-1">
                                             <p className="font-extrabold text-[#3C3C3C]">{s.topic}</p>
                                             <p className="text-xs font-bold text-[#AFAFAF]">{s.date}</p>
                                         </div>
                                         <div className="w-32 h-3 rounded-full bg-[#E5E5E5] overflow-hidden">
-                                            <div
-                                                className="h-full rounded-full transition-all"
-                                                style={{
-                                                    width: `${s.score}%`,
-                                                    backgroundColor: s.score >= 75 ? "#58CC02" : s.score >= 60 ? "#FFC800" : "#FF4B4B",
-                                                }}
-                                            />
+                                            <div className="h-full rounded-full transition-all" style={{ width: `${s.score}%`, backgroundColor: s.score >= 75 ? "#58CC02" : s.score >= 60 ? "#FFC800" : "#FF4B4B" }} />
                                         </div>
-                                        <span className={`font-extrabold text-sm min-w-[40px] text-right ${s.score >= 75 ? "text-[#58CC02]" : s.score >= 60 ? "text-[#FFC800]" : "text-[#FF4B4B]"}`}>
-                                            {s.score}%
-                                        </span>
+                                        <span className={`font-extrabold text-sm min-w-[40px] text-right ${s.score >= 75 ? "text-[#58CC02]" : s.score >= 60 ? "text-[#FFC800]" : "text-[#FF4B4B]"}`}>{s.score}%</span>
                                     </div>
                                 ))}
                             </div>

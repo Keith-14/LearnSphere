@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { StudentProfile, examOptions } from "@/lib/mockData";
+import Image from "next/image";
+import { StudentProfile, examOptions, pingoAvatars } from "@/lib/mockData";
 
 interface SidebarProps {
     profile: StudentProfile;
@@ -15,6 +16,7 @@ interface SidebarProps {
 const studentNavItems = [
     { key: "dashboard", label: "Dashboard", icon: "🏠" },
     { key: "session", label: "Study Session", icon: "📖" },
+    { key: "quiz", label: "Start Quiz", icon: "🧩" },
     { key: "insights", label: "Emotion Insights", icon: "💡" },
     { key: "progress", label: "Progress", icon: "🏆" },
 ];
@@ -22,6 +24,7 @@ const studentNavItems = [
 const teacherNavItems = [
     { key: "dashboard", label: "Dashboard", icon: "🏠" },
     { key: "students", label: "Students", icon: "👥" },
+    { key: "video", label: "Video Analysis", icon: "🎥" },
     { key: "analytics", label: "Analytics", icon: "📊" },
     { key: "reports", label: "Reports", icon: "📋" },
 ];
@@ -35,15 +38,14 @@ export default function Sidebar({
     role = "student",
 }: SidebarProps) {
     const navItems = role === "student" ? studentNavItems : teacherNavItems;
+    const roleIcon = role === "student" ? "/pingo_student.png" : "/pingo_teacher.png";
 
     return (
         <aside className="w-[260px] min-h-screen bg-white border-r-2 border-[#E5E5E5] flex flex-col fixed left-0 top-0 z-30">
             {/* Logo */}
             <div className="p-5 border-b-2 border-[#E5E5E5]">
                 <div className="flex items-center gap-2.5">
-                    <div className="w-10 h-10 rounded-2xl bg-[#58CC02] flex items-center justify-center shadow-md">
-                        <span className="text-white text-lg font-black">LS</span>
-                    </div>
+                    <Image src="/pingo_logo.png" alt="Learning Sphere" width={40} height={40} className="rounded-xl" />
                     <span className="text-xl font-extrabold text-[#3C3C3C]">Learning Sphere</span>
                 </div>
             </div>
@@ -51,8 +53,8 @@ export default function Sidebar({
             {/* Profile Card */}
             <div className="p-5 border-b-2 border-[#E5E5E5]">
                 <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-full bg-[#FFC800] flex items-center justify-center border-2 border-[#E5A600]">
-                        <span className="text-white text-sm font-black">{profile.initials}</span>
+                    <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-[#E5E5E5] bg-[#F7F7F7] flex-shrink-0">
+                        <Image src={roleIcon} alt={role} width={44} height={44} className="object-cover" />
                     </div>
                     <div>
                         <p className="text-sm font-extrabold text-[#3C3C3C]">{profile.name}</p>
@@ -67,12 +69,10 @@ export default function Sidebar({
                 <select
                     value={selectedExam}
                     onChange={(e) => onExamChange(e.target.value)}
-                    className="mt-1.5 w-full rounded-xl border-2 border-[#E5E5E5] bg-white px-3 py-2 text-sm font-bold text-[#3C3C3C] focus:outline-none focus:border-[#58CC02] transition-colors"
+                    className="mt-1.5 w-full rounded-xl border-2 border-[#E5E5E5] bg-white px-3 py-2 text-sm font-bold text-[#3C3C3C] focus:outline-none focus:border-[#1CB0F6] transition-colors"
                 >
                     {examOptions.map((exam) => (
-                        <option key={exam} value={exam}>
-                            {exam}
-                        </option>
+                        <option key={exam} value={exam}>{exam}</option>
                     ))}
                 </select>
             </div>
