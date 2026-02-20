@@ -25,6 +25,7 @@ Automatically adjusts question difficulty during mock tests
 Reduces complexity when stress is detected
 
 Reinforces confidence-building strategies
+<img width="1457" height="761" alt="image" src="https://github.com/user-attachments/assets/f863969e-6352-48ad-ba01-282f73317d79" />
 
 
 💬 Emotion-Aware AI Chatbot
@@ -59,6 +60,7 @@ Generates a 0–5 dropout likelihood score
 
 Visualized in GitHub-style heatmap (Green → Yellow → Red)
 
+
 👩‍🏫 Teacher / Admin Dashboard
 
 Real-time KPI metrics
@@ -70,6 +72,7 @@ CV feedback aggregation
 Student-level emotional timelines
 
 Manual mood-check trigger system
+<img width="1444" height="769" alt="image" src="https://github.com/user-attachments/assets/fd2a4b48-3cdf-4821-80fe-44e249c4f042" />
 
 🔔 Proactive Mood Polling
 
@@ -78,6 +81,7 @@ Duolingo-style emotional check-in popups
 Emoji-based sentiment tracking
 
 Builds longitudinal emotional profiles
+<img width="1451" height="766" alt="image" src="https://github.com/user-attachments/assets/0fc54261-2b1b-452b-8dc3-ece7f1cc92ae" />
 
 🏗 System Architecture
 Frontend (Next.js - Student & Teacher)
