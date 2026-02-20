@@ -1,15 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Sidebar from "@/components/Sidebar";
 import MetricsCard from "@/components/MetricsCard";
 import DashboardCard from "@/components/DashboardCard";
 import EmotionBadge from "@/components/EmotionBadge";
 import StudentTable from "@/components/StudentTable";
+import VideoAnalysis from "@/components/VideoAnalysis";
 import {
     mockStudentProfile,
     mockTeacherMetrics,
     mockStudents,
+    pingoAvatars,
 } from "@/lib/mockData";
 
 const metricColors = ["#1CB0F6", "#FF4B4B", "#CE82FF", "#58CC02"];
@@ -17,11 +20,19 @@ const metricColors = ["#1CB0F6", "#FF4B4B", "#CE82FF", "#58CC02"];
 export default function TeacherPage() {
     const [activeNav, setActiveNav] = useState("dashboard");
     const [selectedExam, setSelectedExam] = useState("GRE");
+    const [teacherName, setTeacherName] = useState("");
+
+    React.useEffect(() => {
+        const storedName = localStorage.getItem("userName");
+        if (storedName) {
+            setTeacherName(storedName);
+        }
+    }, []);
 
     return (
         <div className="flex min-h-screen bg-[#F7F7F7]">
             <Sidebar
-                profile={{ ...mockStudentProfile, name: "Dr. Ananya Roy", initials: "AR", email: "ananya@learningsphere.io" }}
+                profile={{ ...mockStudentProfile, name: teacherName || "Teacher", initials: teacherName ? teacherName.charAt(0) : "T", email: teacherName ? `${teacherName.toLowerCase()}@learningsphere.io` : "teacher@learningsphere.io" }}
                 activeNav={activeNav}
                 onNavChange={setActiveNav}
                 selectedExam={selectedExam}
@@ -34,21 +45,17 @@ export default function TeacherPage() {
                 {/* ─── DASHBOARD ─── */}
                 {activeNav === "dashboard" && (
                     <>
-                        <div className="mb-8">
-                            <h1 className="text-3xl font-black text-[#3C3C3C]">📊 Emotional Analytics Overview</h1>
-                            <p className="text-[#AFAFAF] font-bold mt-1">Monitor how your students are feeling and performing!</p>
+                        <div className="mb-8 flex items-center gap-4">
+                            <Image src={pingoAvatars["Focused"]} alt="Pingo" width={56} height={56} className="rounded-full border-2 border-[#1CB0F6]" />
+                            <div>
+                                <h1 className="text-3xl font-black text-[#3C3C3C]">📊 {teacherName ? `${teacherName}'s` : "Teacher"} Analytics Overview</h1>
+                                <p className="text-[#AFAFAF] font-bold mt-0.5">Monitor how your students are feeling and performing!</p>
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
                             {mockTeacherMetrics.map((metric, i) => (
-                                <MetricsCard
-                                    key={metric.label}
-                                    label={metric.label}
-                                    value={metric.value}
-                                    subtext={metric.subtext}
-                                    icon={metric.icon}
-                                    color={metricColors[i]}
-                                />
+                                <MetricsCard key={metric.label} label={metric.label} value={metric.value} subtext={metric.subtext} icon={metric.icon} color={metricColors[i]} />
                             ))}
                         </div>
 
@@ -57,7 +64,7 @@ export default function TeacherPage() {
                                 <h3 className="text-lg font-extrabold text-[#3C3C3C] mb-4">🎭 Emotion Distribution</h3>
                                 <div className="h-48 flex items-center justify-center rounded-xl bg-[#F7F7F7] border-2 border-dashed border-[#E5E5E5]">
                                     <div className="text-center">
-                                        <p className="text-3xl mb-2">📊</p>
+                                        <Image src={pingoAvatars["Calm"]} alt="Chart" width={48} height={48} className="mx-auto mb-2" />
                                         <p className="text-[#AFAFAF] text-sm font-bold">Chart coming soon!</p>
                                     </div>
                                 </div>
@@ -66,7 +73,7 @@ export default function TeacherPage() {
                                 <h3 className="text-lg font-extrabold text-[#3C3C3C] mb-4">📈 Weekly Emotional Trend</h3>
                                 <div className="h-48 flex items-center justify-center rounded-xl bg-[#F7F7F7] border-2 border-dashed border-[#E5E5E5]">
                                     <div className="text-center">
-                                        <p className="text-3xl mb-2">📉</p>
+                                        <Image src={pingoAvatars["Focused"]} alt="Chart" width={48} height={48} className="mx-auto mb-2" />
                                         <p className="text-[#AFAFAF] text-sm font-bold">Chart coming soon!</p>
                                     </div>
                                 </div>
@@ -80,24 +87,27 @@ export default function TeacherPage() {
                 {/* ─── STUDENTS ─── */}
                 {activeNav === "students" && (
                     <>
-                        <div className="mb-8">
-                            <h1 className="text-3xl font-black text-[#3C3C3C]">👥 Students</h1>
-                            <p className="text-[#AFAFAF] font-bold mt-1">View and manage all enrolled students</p>
+                        <div className="mb-8 flex items-center gap-3">
+                            <Image src={pingoAvatars["Calm"]} alt="Pingo" width={40} height={40} className="rounded-full border-2 border-[#58CC02]" />
+                            <div>
+                                <h1 className="text-3xl font-black text-[#3C3C3C]">👥 Students</h1>
+                                <p className="text-[#AFAFAF] font-bold mt-0.5">View and manage all enrolled students</p>
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-6">
                             <DashboardCard className="text-center">
-                                <p className="text-4xl mb-2">👥</p>
+                                <Image src={pingoAvatars["Calm"]} alt="Total" width={40} height={40} className="mx-auto mb-2" />
                                 <p className="text-3xl font-black text-[#1CB0F6]">{mockStudents.length}</p>
                                 <p className="text-sm font-bold text-[#AFAFAF]">Total Students</p>
                             </DashboardCard>
                             <DashboardCard className="text-center">
-                                <p className="text-4xl mb-2">🔴</p>
+                                <Image src={pingoAvatars["Stressed"]} alt="High Risk" width={40} height={40} className="mx-auto mb-2" />
                                 <p className="text-3xl font-black text-[#FF4B4B]">{mockStudents.filter(s => s.riskLevel === "High").length}</p>
                                 <p className="text-sm font-bold text-[#AFAFAF]">High Risk</p>
                             </DashboardCard>
                             <DashboardCard className="text-center">
-                                <p className="text-4xl mb-2">🟢</p>
+                                <Image src={pingoAvatars["Focused"]} alt="Low Risk" width={40} height={40} className="mx-auto mb-2" />
                                 <p className="text-3xl font-black text-[#58CC02]">{mockStudents.filter(s => s.riskLevel === "Low").length}</p>
                                 <p className="text-sm font-bold text-[#AFAFAF]">Low Risk</p>
                             </DashboardCard>
@@ -107,12 +117,29 @@ export default function TeacherPage() {
                     </>
                 )}
 
+                {/* ─── VIDEO ANALYSIS ─── */}
+                {activeNav === "video" && (
+                    <>
+                        <div className="mb-8 flex items-center gap-3">
+                            <Image src={pingoAvatars["Confused"]} alt="Pingo" width={40} height={40} className="rounded-full border-2 border-[#CE82FF]" />
+                            <div>
+                                <h1 className="text-3xl font-black text-[#3C3C3C]">🎥 Video Analysis</h1>
+                                <p className="text-[#AFAFAF] font-bold mt-0.5">Monitor student emotions via video feed analysis</p>
+                            </div>
+                        </div>
+                        <VideoAnalysis />
+                    </>
+                )}
+
                 {/* ─── ANALYTICS ─── */}
                 {activeNav === "analytics" && (
                     <>
-                        <div className="mb-8">
-                            <h1 className="text-3xl font-black text-[#3C3C3C]">📊 Analytics</h1>
-                            <p className="text-[#AFAFAF] font-bold mt-1">Deep dive into student emotional and performance data</p>
+                        <div className="mb-8 flex items-center gap-3">
+                            <Image src={pingoAvatars["Focused"]} alt="Pingo" width={40} height={40} className="rounded-full border-2 border-[#1CB0F6]" />
+                            <div>
+                                <h1 className="text-3xl font-black text-[#3C3C3C]">📊 Analytics</h1>
+                                <p className="text-[#AFAFAF] font-bold mt-0.5">Deep dive into student emotional and performance data</p>
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-6">
@@ -125,7 +152,8 @@ export default function TeacherPage() {
                                         const colors: Record<string, string> = { Stressed: "#FF4B4B", Focused: "#1CB0F6", Confused: "#CE82FF", Calm: "#58CC02" };
                                         return (
                                             <div key={emotion} className="flex items-center gap-3">
-                                                <EmotionBadge emotion={emotion} />
+                                                <Image src={pingoAvatars[emotion]} alt={emotion} width={28} height={28} className="rounded-full" />
+                                                <EmotionBadge emotion={emotion} showAvatar={false} />
                                                 <div className="flex-1 h-4 rounded-full bg-[#E5E5E5] overflow-hidden">
                                                     <div className="h-full rounded-full" style={{ width: `${pct}%`, backgroundColor: colors[emotion] }} />
                                                 </div>
@@ -163,7 +191,7 @@ export default function TeacherPage() {
                             <h3 className="text-lg font-extrabold text-[#3C3C3C] mb-4">📈 Weekly Emotional Trend</h3>
                             <div className="h-48 flex items-center justify-center rounded-xl bg-[#F7F7F7] border-2 border-dashed border-[#E5E5E5]">
                                 <div className="text-center">
-                                    <p className="text-3xl mb-2">📉</p>
+                                    <Image src={pingoAvatars["Calm"]} alt="Trend" width={48} height={48} className="mx-auto mb-2" />
                                     <p className="text-[#AFAFAF] text-sm font-bold">Trend chart coming soon!</p>
                                 </div>
                             </div>
@@ -174,23 +202,24 @@ export default function TeacherPage() {
                 {/* ─── REPORTS ─── */}
                 {activeNav === "reports" && (
                     <>
-                        <div className="mb-8">
-                            <h1 className="text-3xl font-black text-[#3C3C3C]">📋 Reports</h1>
-                            <p className="text-[#AFAFAF] font-bold mt-1">Generate and review student performance reports</p>
+                        <div className="mb-8 flex items-center gap-3">
+                            <Image src={pingoAvatars["Calm"]} alt="Pingo" width={40} height={40} className="rounded-full border-2 border-[#58CC02]" />
+                            <div>
+                                <h1 className="text-3xl font-black text-[#3C3C3C]">📋 Reports</h1>
+                                <p className="text-[#AFAFAF] font-bold mt-0.5">Generate and review student performance reports</p>
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
                             {[
-                                { title: "Weekly Summary", desc: "Overview of student emotions and performance this week", emoji: "📅", color: "#1CB0F6" },
-                                { title: "Risk Assessment", desc: "Identify students who may need additional support", emoji: "⚠️", color: "#FF4B4B" },
-                                { title: "Emotion Patterns", desc: "Analyze emotional trends across all sessions", emoji: "🎭", color: "#CE82FF" },
-                                { title: "Engagement Report", desc: "Track student participation and activity levels", emoji: "📊", color: "#58CC02" },
+                                { title: "Weekly Summary", desc: "Overview of student emotions and performance this week", emoji: "📅", color: "#1CB0F6", avatar: "Focused" as const },
+                                { title: "Risk Assessment", desc: "Identify students who may need additional support", emoji: "⚠️", color: "#FF4B4B", avatar: "Stressed" as const },
+                                { title: "Emotion Patterns", desc: "Analyze emotional trends across all sessions", emoji: "🎭", color: "#CE82FF", avatar: "Confused" as const },
+                                { title: "Engagement Report", desc: "Track student participation and activity levels", emoji: "📊", color: "#58CC02", avatar: "Calm" as const },
                             ].map((report) => (
                                 <DashboardCard key={report.title} className="cursor-pointer group hover:border-b-2 hover:mt-[2px] transition-all duration-100">
                                     <div className="flex items-start gap-4">
-                                        <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl border-b-4 group-hover:border-b-2 transition-all" style={{ backgroundColor: `${report.color}20`, borderColor: `${report.color}60` }}>
-                                            {report.emoji}
-                                        </div>
+                                        <Image src={pingoAvatars[report.avatar]} alt={report.title} width={56} height={56} className="rounded-2xl border-2 border-[#E5E5E5]" />
                                         <div className="flex-1">
                                             <h3 className="text-base font-extrabold text-[#3C3C3C] group-hover:text-[#1CB0F6] transition-colors">{report.title}</h3>
                                             <p className="text-sm font-bold text-[#AFAFAF] mt-1">{report.desc}</p>

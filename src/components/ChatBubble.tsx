@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 interface ChatBubbleProps {
     role: "user" | "assistant";
@@ -14,14 +15,14 @@ export default function ChatBubble({ role, content, timestamp }: ChatBubbleProps
     return (
         <div className={`flex ${isUser ? "justify-end" : "justify-start"} mb-4`}>
             {!isUser && (
-                <div className="w-9 h-9 rounded-full bg-[#58CC02] flex items-center justify-center mr-2 mt-1 flex-shrink-0 border-2 border-[#46A302]">
-                    <span className="text-white text-sm">🤖</span>
+                <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center mr-2 mt-1 flex-shrink-0 border-2 border-[#E5E5E5] overflow-hidden">
+                    <Image src="/pingo_logo.png" alt="Pingo" width={36} height={36} className="object-cover" />
                 </div>
             )}
             <div
                 className={`max-w-[75%] rounded-2xl px-4 py-3 ${isUser
-                        ? "bg-[#DDF4FF] text-[#3C3C3C] border-2 border-[#1CB0F6] rounded-br-lg"
-                        : "bg-white text-[#3C3C3C] border-2 border-[#E5E5E5] rounded-bl-lg"
+                    ? "bg-[#DDF4FF] text-[#3C3C3C] border-2 border-[#1CB0F6] rounded-br-lg"
+                    : "bg-white text-[#3C3C3C] border-2 border-[#E5E5E5] rounded-bl-lg"
                     }`}
             >
                 <p className="text-sm font-bold leading-relaxed">{content}</p>
