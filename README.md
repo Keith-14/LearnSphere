@@ -155,37 +155,6 @@ Groq LLM (Emotion-aware chatbot)
 
 Predictive dropout scoring model
 
-⚙️ Installation Guide
-1️⃣ Clone Repository
-git clone https://github.com/your-username/LearnSphere.git
-2️⃣ Backend Setup
-cd backend
-pip install -r requirements.txt
-uvicorn api:app --reload --port 8000
-3️⃣ Frontend Setup
-cd frontend
-npm install
-npm run dev
-
-Frontend runs on:
-
-http://localhost:3000
-
-Backend API runs on:
-
-http://localhost:8000
-🔐 Environment Configuration
-
-You must configure:
-
-Firebase service account key (firebase_key.json)
-
-Groq API key
-
-CV model setup
-
-Environment variables for API endpoints
-
 🧪 Integration Checklist
 
 Ensure the following work correctly:
