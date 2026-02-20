@@ -13,6 +13,10 @@ Live facial emotion analysis using Computer Vision
 Detects stress, confusion, engagement levels
 
 Emotion signals logged securely to Firebase
+<img width="1385" height="795" alt="image" src="https://github.com/user-attachments/assets/22f7990c-1cac-4387-94f8-dcf411fb3a36" />
+
+<img width="1353" height="781" alt="image" src="https://github.com/user-attachments/assets/5bab4ad7-70a2-48eb-8724-17a3d20eb99f" />
+
 
 📈 Adaptive Testing Engine
 
@@ -21,6 +25,7 @@ Automatically adjusts question difficulty during mock tests
 Reduces complexity when stress is detected
 
 Reinforces confidence-building strategies
+
 
 💬 Emotion-Aware AI Chatbot
 
