@@ -1,36 +1,226 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🎓 LearnSphere
+Emotion-Aware Adaptive Learning Platform
 
-## Getting Started
+LearnSphere is a full-stack AI-driven adaptive learning ecosystem designed to intelligently respond to both academic performance and emotional well-being.
 
-First, run the development server:
+Unlike traditional EdTech systems that only measure scores, LearnSphere integrates Computer Vision, LLM-based emotional intelligence, and predictive analytics to detect stress, adapt learning pathways, and proactively prevent student dropout.
 
-```bash
+🚀 Core Features
+🧠 Real-Time Emotion Detection
+
+Live facial emotion analysis using Computer Vision
+
+Detects stress, confusion, engagement levels
+
+Emotion signals logged securely to Firebase
+
+📈 Adaptive Testing Engine
+
+Automatically adjusts question difficulty during mock tests
+
+Reduces complexity when stress is detected
+
+Reinforces confidence-building strategies
+
+💬 Emotion-Aware AI Chatbot
+
+Powered by Groq LLM
+
+Detects emotional tone in conversations
+
+Switches between:
+
+Academic guidance mode
+
+Emotional intervention mode
+
+Redirects students to wellness activities when needed
+
+🔥 Dropout Risk Prediction
+
+Combines:
+
+Academic performance trends
+
+CV stress frequency
+
+Chatbot sentiment signals
+
+Engagement metrics
+
+Mood polling history
+
+Generates a 0–5 dropout likelihood score
+
+Visualized in GitHub-style heatmap (Green → Yellow → Red)
+
+👩‍🏫 Teacher / Admin Dashboard
+
+Real-time KPI metrics
+
+Live chatbot sentiment monitoring
+
+CV feedback aggregation
+
+Student-level emotional timelines
+
+Manual mood-check trigger system
+
+🔔 Proactive Mood Polling
+
+Duolingo-style emotional check-in popups
+
+Emoji-based sentiment tracking
+
+Builds longitudinal emotional profiles
+
+🏗 System Architecture
+Frontend (Next.js - Student & Teacher)
+        ↓
+Firebase (Real-Time Data Layer)
+        ↓
+AI Services Layer
+    - Computer Vision Model
+    - Groq LLM Chat Engine
+    - Dropout Risk Engine
+        ↓
+Admin Analytics Dashboard (Streamlit)
+🔄 Data Flow Overview
+Student Side Writes:
+
+CV emotion signals
+
+Chatbot sentiment logs
+
+Mood poll responses
+
+Test performance metrics
+
+Teacher Side Reads:
+
+Aggregated KPIs
+
+Dropout heatmap
+
+Live sentiment states
+
+Emotional history timelines
+
+All interactions are synchronized through Firebase.
+
+📊 Dropout Heatmap Logic
+
+Each student is mapped to a color-coded grid cell:
+
+🟢 Green → Low risk
+
+🟡 Yellow → Medium risk
+
+🔴 Red → High risk
+
+Risk score calculation factors:
+
+Test score decline
+
+CV-detected stress frequency
+
+Chatbot emotional distress patterns
+
+Reduced engagement
+
+Negative mood trends
+
+🧩 Tech Stack
+Frontend
+
+Next.js (TypeScript)
+
+Tailwind CSS
+
+Real-time Firebase listeners
+
+Backend
+
+FastAPI (ML API layer)
+
+Streamlit (Admin dashboard)
+
+Firebase Firestore
+
+AI Components
+
+Computer Vision (Emotion detection)
+
+Groq LLM (Emotion-aware chatbot)
+
+Predictive dropout scoring model
+
+⚙️ Installation Guide
+1️⃣ Clone Repository
+git clone https://github.com/your-username/LearnSphere.git
+2️⃣ Backend Setup
+cd backend
+pip install -r requirements.txt
+uvicorn api:app --reload --port 8000
+3️⃣ Frontend Setup
+cd frontend
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Frontend runs on:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Backend API runs on:
 
-## Learn More
+http://localhost:8000
+🔐 Environment Configuration
 
-To learn more about Next.js, take a look at the following resources:
+You must configure:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Firebase service account key (firebase_key.json)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Groq API key
 
-## Deploy on Vercel
+CV model setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Environment variables for API endpoints
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🧪 Integration Checklist
+
+Ensure the following work correctly:
+
+CV script writes CV_Sentiment_Data to Firebase
+
+Mock test logic reads stress level dynamically
+
+Chatbot logs emotional state in database
+
+Dropout risk engine calculates and updates heatmap
+
+Teacher-triggered mood check appears on student interface
+
+Emoji response updates student sentiment profile
+
+📈 Future Enhancements
+
+Batch prediction API for scalability
+
+Real-time WebSocket monitoring
+
+Automated intervention triggers
+
+Weekly risk forecasting
+
+Behavioral clustering engine
+
+AI-powered mentorship recommendations
+
+🎯 Vision
+
+LearnSphere transforms competitive exam preparation from performance-driven to emotionally intelligent learning.
+
+We are building a system where:
+
+AI doesn't just measure scores —
+it understands students.
