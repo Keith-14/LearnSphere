@@ -17,6 +17,9 @@ Emotion signals logged securely to Firebase
 
 <img width="1353" height="781" alt="image" src="https://github.com/user-attachments/assets/5bab4ad7-70a2-48eb-8724-17a3d20eb99f" />
 
+<img width="1458" height="702" alt="image" src="https://github.com/user-attachments/assets/31081022-5c80-4a30-b3b1-b6d9d5f1fe25" />
+
+
 
 📈 Adaptive Testing Engine
 
@@ -41,6 +44,8 @@ Academic guidance mode
 Emotional intervention mode
 
 Redirects students to wellness activities when needed
+<img width="1457" height="697" alt="image" src="https://github.com/user-attachments/assets/f16d8e07-739f-4407-999c-bb3292b4eb3f" />
+
 
 🔥 Dropout Risk Prediction
 
@@ -59,6 +64,9 @@ Mood polling history
 Generates a 0–5 dropout likelihood score
 
 Visualized in GitHub-style heatmap (Green → Yellow → Red)
+
+<img width="1471" height="691" alt="image" src="https://github.com/user-attachments/assets/6082efd4-1f85-45ed-96f1-83d05844cfec" />
+
 
 
 👩‍🏫 Teacher / Admin Dashboard
@@ -81,7 +89,10 @@ Duolingo-style emotional check-in popups
 Emoji-based sentiment tracking
 
 Builds longitudinal emotional profiles
-<img width="1451" height="766" alt="image" src="https://github.com/user-attachments/assets/0fc54261-2b1b-452b-8dc3-ece7f1cc92ae" />
+<img width="1465" height="769" alt="image" src="https://github.com/user-attachments/assets/0670f911-50f2-4311-898e-1dfd0c524d2a" />
+
+<img width="1442" height="763" alt="image" src="https://github.com/user-attachments/assets/2be717d0-f4b1-4d5c-9237-96bf027e7f4a" />
+
 
 🏗 System Architecture
 Frontend (Next.js - Student & Teacher)
