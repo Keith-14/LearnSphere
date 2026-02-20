@@ -89,6 +89,8 @@ Duolingo-style emotional check-in popups
 Emoji-based sentiment tracking
 
 Builds longitudinal emotional profiles
+<img width="816" height="374" alt="image" src="https://github.com/user-attachments/assets/27e8f9c5-96a9-4af1-b8a8-b0b9a99c935e" />
+
 <img width="1465" height="769" alt="image" src="https://github.com/user-attachments/assets/0670f911-50f2-4311-898e-1dfd0c524d2a" />
 
 <img width="1442" height="763" alt="image" src="https://github.com/user-attachments/assets/2be717d0-f4b1-4d5c-9237-96bf027e7f4a" />
