@@ -1,0 +1,1 @@
+# VEGA training package

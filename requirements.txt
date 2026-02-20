@@ -1,0 +1,18 @@
+# Core (NO TensorFlow, NO MediaPipe — avoids macOS mutex crash)
+opencv-contrib-python>=4.8.0   # includes bundled Haar cascades + DNN module
+numpy>=1.24.0
+
+# Emotion detection — pure ONNX, zero TF dependency
+onnxruntime>=1.18.0
+
+
+# Deep learning (training)
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Streamlit UI
+streamlit>=1.28.0
+
+# Utilities
+Pillow>=9.5.0
+scipy>=1.10.0
