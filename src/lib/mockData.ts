@@ -40,6 +40,11 @@ export interface StudentRecord {
     emotion: Emotion;
     riskLevel: RiskLevel;
     lastActive: string;
+    avgScore: number;
+    stressLevel: number;
+    confidenceLevel: number;
+    loginCount: number;
+    avgSessionTime: number;
 }
 
 // ─── Student Profile ─────────────────────────────────────
@@ -100,14 +105,14 @@ export const mockTeacherMetrics: MetricItem[] = [
 
 // ─── Student Records (Teacher Table) ─────────────────────
 export const mockStudents: StudentRecord[] = [
-    { id: "st1", name: "Aarav Patel", exam: "GRE", emotion: "Focused", riskLevel: "Low", lastActive: "2 min ago" },
-    { id: "st2", name: "Meera Singh", exam: "GMAT", emotion: "Stressed", riskLevel: "High", lastActive: "15 min ago" },
-    { id: "st3", name: "Rohan Gupta", exam: "CAT", emotion: "Stressed", riskLevel: "High", lastActive: "1 hr ago" },
-    { id: "st4", name: "Priya Sharma", exam: "GRE", emotion: "Calm", riskLevel: "Medium", lastActive: "30 min ago" },
-    { id: "st5", name: "Arjun Reddy", exam: "GMAT", emotion: "Confused", riskLevel: "Medium", lastActive: "45 min ago" },
-    { id: "st6", name: "Kavya Nair", exam: "CAT", emotion: "Focused", riskLevel: "Low", lastActive: "5 min ago" },
-    { id: "st7", name: "Ishaan Joshi", exam: "GRE", emotion: "Stressed", riskLevel: "High", lastActive: "20 min ago" },
-    { id: "st8", name: "Diya Menon", exam: "GMAT", emotion: "Calm", riskLevel: "Low", lastActive: "10 min ago" },
+    { id: "st1", name: "Aarav Patel", exam: "GRE", emotion: "Focused", riskLevel: "Low", lastActive: "2 min ago", avgScore: 85, stressLevel: 2, confidenceLevel: 4, loginCount: 12, avgSessionTime: 45 },
+    { id: "st2", name: "Meera Singh", exam: "GMAT", emotion: "Stressed", riskLevel: "High", lastActive: "15 min ago", avgScore: 62, stressLevel: 4, confidenceLevel: 2, loginCount: 8, avgSessionTime: 30 },
+    { id: "st3", name: "Rohan Gupta", exam: "CAT", emotion: "Stressed", riskLevel: "High", lastActive: "1 hr ago", avgScore: 58, stressLevel: 4, confidenceLevel: 2, loginCount: 6, avgSessionTime: 25 },
+    { id: "st4", name: "Priya Sharma", exam: "GRE", emotion: "Calm", riskLevel: "Medium", lastActive: "30 min ago", avgScore: 75, stressLevel: 2, confidenceLevel: 3, loginCount: 10, avgSessionTime: 40 },
+    { id: "st5", name: "Arjun Reddy", exam: "GMAT", emotion: "Confused", riskLevel: "Medium", lastActive: "45 min ago", avgScore: 70, stressLevel: 3, confidenceLevel: 3, loginCount: 9, avgSessionTime: 35 },
+    { id: "st6", name: "Kavya Nair", exam: "CAT", emotion: "Focused", riskLevel: "Low", lastActive: "5 min ago", avgScore: 88, stressLevel: 1, confidenceLevel: 4, loginCount: 14, avgSessionTime: 50 },
+    { id: "st7", name: "Ishaan Joshi", exam: "GRE", emotion: "Stressed", riskLevel: "High", lastActive: "20 min ago", avgScore: 60, stressLevel: 4, confidenceLevel: 2, loginCount: 7, avgSessionTime: 28 },
+    { id: "st8", name: "Diya Menon", exam: "GMAT", emotion: "Calm", riskLevel: "Low", lastActive: "10 min ago", avgScore: 82, stressLevel: 1, confidenceLevel: 4, loginCount: 11, avgSessionTime: 48 },
 ];
 
 // ─── Exam Options ────────────────────────────────────────
