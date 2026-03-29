@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+groq
+firebase-admin
+pydantic
+python-dotenv
+streamlit
+requests
+httpx
